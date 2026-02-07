@@ -1,0 +1,37 @@
+{
+    "language": "C++",
+    "dependency_file": "CMakeLists.txt",
+    "dependencies": ["GLFW", "GLEW", "GLM", "nlohmann/json"],
+    "files": [
+        {
+            "path": "src/BrainSimulator.h",
+            "description": "Main simulation class interface",
+            "exports": ["class BrainSimulator", "void run(NeuralNetwork&, StimulationModel&, int)"]
+        },
+        {
+            "path": "src/NeuralNetwork.h",
+            "description": "Neural network model definition",
+            "exports": ["class NeuralNetwork", "void update()", "float getActivation(int)"]
+        },
+        {
+            "path": "src/StimulationModel.h",
+            "description": "Brain stimulation modeling interface",
+            "exports": ["class StimulationModel", "void applyStimulation(NeuralNetwork&)", "void setRegion(const std::string&)", "void setIntensity(float)"]
+        },
+        {
+            "path": "src/ConsciousnessMetrics.h",
+            "description": "Calculates consciousness-related metrics from neural data",
+            "exports": ["class ConsciousnessMetrics", "double calculateAwarenessLevel(const NeuralNetwork&)", "double calculateIntegration(const NeuralNetwork&)"]
+        },
+        {
+            "path": "src/main.cpp",
+            "description": "Entry point of the application",
+            "imports_from_other_files": ["BrainSimulator.h", "NeuralNetwork.h", "StimulationModel.h", "ConsciousnessMetrics.h"]
+        },
+        {
+            "path": "src/config.cpp",
+            "description": "Handles configuration loading from JSON file",
+            "exports": ["struct Config", "Config loadConfig(const std::string&)"]
+        }
+    ]
+}
